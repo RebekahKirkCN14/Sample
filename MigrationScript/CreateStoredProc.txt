@@ -1,0 +1,35 @@
+﻿USE [api-sample]
+GO
+
+/****** Object:  StoredProcedure [dbo].[uspEmployeeCrud]    Script Date: 14/09/2021 09:03:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+		CREATE PROCEDURE [dbo].[uspEmployeeCrud]
+		 (
+		  @CardNumber [INT] = NULL,
+		  @EmployeeId [UNIQUEIDENTIFIER] = NULL,
+		  @EmployeeName [NVARCHAR](200) = NULL,		  		  
+		  @CompanyName [NVARCHAR](200) = NULL,
+		  @Balance [INT] = NULL,
+		  @ModifiedDate [DATETIME] = NULL,
+		  @ModifiedBy [NVARCHAR] (200) = NULL,
+		  @Mode VARCHAR(1) = 'L'
+		  )
+		 AS	
+			IF(@Mode = 'C')
+			BEGIN
+			INSERT INTO [dbo].[EmployeeCard]
+			([ModifiedDate],[ModifiedBy],[CardNumber],[EmployeeId],[EmployeeName],[CompanyName],[Balance]) 
+			VALUES
+			(GETDATE(),@ModifiedBy,@CardNumber,@EmployeeId,@EmployeeName,@CompanyName,@Balance)			  
+			END
+			
+GO

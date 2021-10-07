@@ -1,0 +1,25 @@
+﻿USE [api-sample]
+GO
+
+/****** Object:  Table [dbo].[EmployeeCard]    Script Date: 14/09/2021 09:01:52 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EmployeeCard](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ModifiedDate] [datetime] NOT NULL,
+	[ModifiedBy] [varchar](200) NOT NULL,
+	[CardNumber] [int] NOT NULL,
+	[EmployeeId] [uniqueidentifier] NOT NULL,
+	[EmployeeName] [varchar](200) NOT NULL,
+	[CompanyName] [varchar](200) NOT NULL,
+	[Balance] [int] NOT NULL,
+ CONSTRAINT [PK_EmployeeCard] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
