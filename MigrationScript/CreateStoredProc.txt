@@ -1,7 +1,7 @@
 ﻿USE [api-sample]
 GO
 
-/****** Object:  StoredProcedure [dbo].[uspEmployeeCrud]    Script Date: 14/09/2021 09:03:35 ******/
+/****** Object:  StoredProcedure [dbo].[uspEmployeeCrud]    Script Date: 07/10/2021 13:28:34 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -31,5 +31,18 @@ GO
 			VALUES
 			(GETDATE(),@ModifiedBy,@CardNumber,@EmployeeId,@EmployeeName,@CompanyName,@Balance)			  
 			END
-			
+			IF(@Mode = 'U')
+			BEGIN
+			Update [dbo].[EmployeeCard]
+			Set
+			[Balance] = @Balance, [CardNumber] = @CardNumber
+		    Where [CardNumber] = @CardNumber	
+			END
+			IF(@Mode = 'B')
+			BEGIN
+			Select [Balance] from [dbo].[EmployeeCard]
+		    Where [CardNumber] = @CardNumber
+			END
 GO
+
+
